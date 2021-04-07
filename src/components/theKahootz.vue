@@ -2,9 +2,9 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <div v-for="(kahoot, index) in kahoots" :key="index">
-  <div style="padding-top: 50px; padding-bottom:10px; font-weight: bold"> Spørsmål: {{ txtCleaner(kahoot.question)}}</div>
-  <div>{{txtCleaner(kahoot.correct_answer)}} - V</div>
-  <div style="color:red" v-for="wrong in kahoot.incorrect_answers" :key="wrong">{{txtCleaner(wrong)}}</div>
+  <div style="padding-top: 50px; padding-bottom:10px; font-weight: bold" v-html="kahoot.question"> Spørsmål: {{kahoot.question}}</div>
+  <div v-html="kahoot.correct_answer">{{kahoot.correct_answer}} - V</div>
+  <div style="color:red" v-for="wrong in kahoot.incorrect_answers" :key="wrong" v-html="wrong">{{wrong}}</div>
         
     </div>
   </div>
@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     txtCleaner(txt){
-        console.log(decodeURIComponent(txt))
+        console.log(JSON.stringify(txt))
      let div = document.createElement('div');
     div.innerText = txt;
     return div.innerHTML;
